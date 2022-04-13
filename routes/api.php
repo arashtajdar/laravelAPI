@@ -19,15 +19,22 @@ use Illuminate\Support\Facades\Route;
 // Auth routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
 
 // Product routes
 Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/{id}',[ProductController::class,'show']);
-Route::post('/products',[ProductController::class,'store']);
-Route::put('/products/{id}',[ProductController::class,'update']);
-Route::delete('/products/{id}',[ProductController::class,'destroy']);
 
+
+Route::middleware(['auth:sanctum'])->group(function (){
+    // Product routes
+    Route::post('/products',[ProductController::class,'store']);
+    Route::put('/products/{id}',[ProductController::class,'update']);
+    Route::delete('/products/{id}',[ProductController::class,'destroy']);
+
+    // Auth routes
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
