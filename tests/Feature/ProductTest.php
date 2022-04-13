@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,14 +15,15 @@ class ProductTest extends TestCase
      *
      * @return void
      */
-    use withFaker;
+    use withFaker, DatabaseTransactions;
     private array $product_store_input;
+
     protected function setUp() : void
     {
         parent::setUp();
         $code = $this->faker->text(5);
         $title = $this->faker->name(5);
-        $description = $this->faker->paragraph(5);
+        $description = $this->faker->paragraph(1);
         $this->product_store_input = [
             "code"          =>  $code,
             "title"         =>  $title,
@@ -54,6 +57,7 @@ class ProductTest extends TestCase
 ////        $response = $this->get('/api/products');
 //
 //    }
+
 
 
 }
