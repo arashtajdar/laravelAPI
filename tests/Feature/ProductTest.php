@@ -3,9 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
@@ -16,13 +18,15 @@ class ProductTest extends TestCase
      * @return void
      */
     use withFaker;
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private array $product;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $UserModel = User::factory()->make();
+        Sanctum::actingAs($UserModel);
         $productModel = Product::factory()->make();
         $this->product = $productModel->getAttributes();
     }
