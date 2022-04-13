@@ -13,6 +13,7 @@ class ProductTest extends TestCase
      *
      * @return void
      */
+    use withFaker;
     public function test_product_index_functionality()
     {
         $response = $this->get('/api/products');
@@ -26,13 +27,19 @@ class ProductTest extends TestCase
         $response->assertStatus(422);
 
         // Test if we send correct data to product store endpoint, it will be ok
+        $code = $this->faker->text(5);
+        $title = $this->faker->name(5);
+        $description = $this->faker->paragraph(5);
         $product_store_input = [
-            "code"=>"P003",
-            "title"=>"Second product",
-            "description"=>"Description of second product"
+            "code"          =>  $code,
+            "title"         =>  $title,
+            "description"   =>  $description
         ];
         $response = $this->post('/api/products',$product_store_input);
         $response->assertStatus(200);
+        $this->assertDatabaseHas('products', [
+            'code' => $code
+        ]);
     }
 
 }
