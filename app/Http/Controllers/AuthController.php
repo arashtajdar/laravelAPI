@@ -33,4 +33,31 @@ class AuthController extends Controller
         return Response($response, 201);
     }
 
+    public function login(Request $request) : Response
+    {
+        $fields = $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string'
+        ]);
+
+        // Verify if email exist
+        $user = User::where('email', $fields['email'])->first();
+
+        // Verify password
+        if(!$user || !Hash::check($fields['password'], $user->password)) {
+            return response([
+                'message' => 'Wrong information. Please try again!'
+            ], 401);
+        }
+
+        $token = $user->createToken('UnitedRemoteToken')->plainTextToken;
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return response($response, 201);
+    }
+
 }
