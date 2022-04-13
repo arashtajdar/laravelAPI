@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a list of all products.
      *
      * @return Response
      */
@@ -21,7 +21,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Save a new product into database.
      *
      * @param Request $request
      * @return Response
@@ -41,7 +41,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the product specified by id.
      *
      * @param int $id
      * @return Response
@@ -52,7 +52,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the product based on given data.
      *
      * @param Request $request
      * @param int $id
@@ -66,7 +66,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product from database.
      *
      * @param int $id
      * @return Response
