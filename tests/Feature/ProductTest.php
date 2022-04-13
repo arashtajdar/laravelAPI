@@ -52,11 +52,12 @@ class ProductTest extends TestCase
         ]);
     }
 
-//    public function test_product_show_functionality()
-//    {
-////        $response = $this->get('/api/products');
-//
-//    }
+    public function test_product_show_functionality()
+    {
+        $id = $this->post('/api/products',$this->product_store_input)->json("id");
+        $response = $this->get('/api/products/'.$id);
+        $response->assertStatus(200);
+    }
     protected function tearDown() : void
     {
         parent::tearDown();
