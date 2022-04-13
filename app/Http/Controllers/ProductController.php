@@ -38,7 +38,7 @@ class ProductController extends Controller
             $errorText = $validator->messages()->first('*');
             return Response($errorText,"422");
         }
-        return Product::create($request->all());
+        return Response(Product::create($request->all()),"200");
     }
 
     /**
