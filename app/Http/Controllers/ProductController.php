@@ -25,7 +25,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-//
+        return Product::create([
+            'code' => "P001",
+            'title' => "product number one",
+            'description' => "product number one is a green empty box",
+        ]);
     }
 
     /**
