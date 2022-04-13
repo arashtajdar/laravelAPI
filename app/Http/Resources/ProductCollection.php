@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 
 /**
+ * @property mixed id
  * @property mixed code
  * @property mixed title
  * @property mixed description
@@ -25,6 +26,7 @@ class ProductCollection extends JsonResource
     public function toArray($request)
     {
         return [
+            'Product ID' => $this->id,
             'Product code' => $this->code,
             'Product title' => $this->title,
             'Description of product' => $this->description,
