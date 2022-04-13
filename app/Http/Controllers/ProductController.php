@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductCollection;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -14,11 +16,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return AnonymousResourceCollection
+     * @return Application|ResponseFactory|AnonymousResourceCollection|Response
      */
     public function index()
     {
-        return ProductCollection::collection(Product::all());
+        return Response(ProductCollection::collection(Product::all()),"200");
     }
 
     /**
