@@ -58,6 +58,13 @@ class ProductTest extends TestCase
         $response = $this->get('/api/products/'.$id);
         $response->assertStatus(200);
     }
+
+    public function test_product_update_functionality()
+    {
+        $id = $this->post('/api/products',$this->product_store_input)->json("id");
+        $response = $this->put('/api/products/'.$id,$this->product_store_input);
+        $response->assertStatus(200);
+    }
     protected function tearDown() : void
     {
         parent::tearDown();
