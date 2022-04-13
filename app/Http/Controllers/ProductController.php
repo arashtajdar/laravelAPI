@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -25,11 +26,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return Product::create([
-            'code' => "P001",
-            'title' => "product number one",
-            'description' => "product number one is a green empty box",
+        $validator = Validator::make($request->all(),[
+            "code" => "required|string",
+            "title" => "required|string",
+            "description" => "required|string",
         ]);
+        if ($validator->fails()) {
+            $errorText = $validator->messages()->first('*');
+            return Response($errorText,"422");
+        }
+        return Product::create($request->all());
     }
 
     /**
