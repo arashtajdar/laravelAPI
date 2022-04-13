@@ -14,6 +14,21 @@ class ProductTest extends TestCase
      * @return void
      */
     use withFaker;
+    private array $product_store_input;
+    protected function setUp() : void
+    {
+        parent::setUp();
+        $code = $this->faker->text(5);
+        $title = $this->faker->name(5);
+        $description = $this->faker->paragraph(5);
+        $this->product_store_input = [
+            "code"          =>  $code,
+            "title"         =>  $title,
+            "description"   =>  $description
+        ];
+    }
+
+
     public function test_product_index_functionality()
     {
         $response = $this->get('/api/products');
@@ -27,19 +42,18 @@ class ProductTest extends TestCase
         $response->assertStatus(422);
 
         // Test if we send correct data to product store endpoint, it will be ok
-        $code = $this->faker->text(5);
-        $title = $this->faker->name(5);
-        $description = $this->faker->paragraph(5);
-        $product_store_input = [
-            "code"          =>  $code,
-            "title"         =>  $title,
-            "description"   =>  $description
-        ];
-        $response = $this->post('/api/products',$product_store_input);
+        $response = $this->post('/api/products',$this->product_store_input);
         $response->assertStatus(200);
         $this->assertDatabaseHas('products', [
-            'code' => $code
+            'code' => $this->product_store_input["code"]
         ]);
     }
+
+//    public function test_product_show_functionality()
+//    {
+////        $response = $this->get('/api/products');
+//
+//    }
+
 
 }
