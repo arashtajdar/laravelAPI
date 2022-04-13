@@ -57,7 +57,10 @@ class ProductTest extends TestCase
 ////        $response = $this->get('/api/products');
 //
 //    }
-
+    protected function tearDown() : void
+    {
+        parent::tearDown();
+    }
 
 
 }
