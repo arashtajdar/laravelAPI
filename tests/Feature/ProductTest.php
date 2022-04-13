@@ -11,27 +11,21 @@ use Tests\TestCase;
 class ProductTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * A basic feature to test product endpoint functionalities.
      *
      * @return void
      */
-    use withFaker, DatabaseTransactions;
-    private array $product_store_input;
+    use withFaker;
+    use RefreshDatabase;
 
-    protected function setUp() : void
+    private array $product;
+
+    protected function setUp(): void
     {
         parent::setUp();
-        $code = $this->faker->text(5);
-        $title = $this->faker->name(5);
-        $description = $this->faker->paragraph(1);
-        $this->product_store_input = [
-            "code"          =>  $code,
-            "title"         =>  $title,
-            "description"   =>  $description
-        ];
+        $productModel = Product::factory()->make();
+        $this->product = $productModel->getAttributes();
     }
-
-
     public function test_product_index_functionality()
     {
         $response = $this->get('/api/products');
@@ -45,34 +39,35 @@ class ProductTest extends TestCase
         $response->assertStatus(422);
 
         // Test if we send correct data to product store endpoint, it will be ok
-        $response = $this->post('/api/products',$this->product_store_input);
+        $response = $this->post('/api/products', $this->product);
         $response->assertStatus(200);
         $this->assertDatabaseHas('products', [
-            'code' => $this->product_store_input["code"]
+            'code' => $this->product["code"]
         ]);
     }
 
     public function test_product_show_functionality()
     {
-        $id = $this->post('/api/products',$this->product_store_input)->json("id");
-        $response = $this->get('/api/products/'.$id);
+        $id = $this->post('/api/products', $this->product)->json("id");
+        $response = $this->get('/api/products/' . $id);
         $response->assertStatus(200);
     }
 
     public function test_product_update_functionality()
     {
-        $id = $this->post('/api/products',$this->product_store_input)->json("id");
-        $response = $this->put('/api/products/'.$id,$this->product_store_input);
+        $id = $this->post('/api/products', $this->product)->json("id");
+        $response = $this->put('/api/products/' . $id, $this->product);
         $response->assertStatus(200);
     }
 
     public function test_product_delete_functionality()
     {
-        $id = $this->post('/api/products',$this->product_store_input)->json("id");
-        $response = $this->delete('/api/products/'.$id);
+        $id = $this->post('/api/products', $this->product)->json("id");
+        $response = $this->delete('/api/products/' . $id);
         $response->assertStatus(200);
     }
-    protected function tearDown() : void
+
+    protected function tearDown(): void
     {
         parent::tearDown();
     }
