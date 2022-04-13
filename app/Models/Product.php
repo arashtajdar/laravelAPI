@@ -10,6 +10,8 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        "code","title","description"
+        "code", "title", "description"
     ];
+
+    // Todo : use relations for category
 }
