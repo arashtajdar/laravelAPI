@@ -29,6 +29,7 @@ class ProductCollection extends JsonResource
             'Product ID' => $this->id,
             'Product code' => $this->code,
             'Product title' => $this->title,
+            'Product category name' => $this->category->name,
             'Description of product' => $this->description,
             'Creation date' => Carbon::parse($this->created_at)->toDateString()
         ];
