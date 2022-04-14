@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductCollection;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,7 +18,8 @@ class ProductController extends Controller
      */
     public function index(): Response
     {
-        return Response(ProductCollection::collection(Product::all()),"200");
+        $products = Product::with("category")->get();
+        return Response(ProductCollection::collection($products),"200");
     }
 
     /**
@@ -31,6 +33,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(),[
             "code" => "required|string",
             "title" => "required|string",
+            "category_id" => 'nullable|numeric|exists:Categories,id',
             "description" => "required|string",
         ]);
         if ($validator->fails()) {
