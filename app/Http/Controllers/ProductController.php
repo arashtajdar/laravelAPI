@@ -63,7 +63,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, int $id): Response
     {
+
         $product = Product::find($id);
+        if (!$product){
+            return Response("Not found","404");
+        }
         $product->update($request->all());
         return Response(new ProductCollection($product),"200");
     }
