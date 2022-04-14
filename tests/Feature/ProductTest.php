@@ -20,7 +20,6 @@ class ProductTest extends TestCase
     use DatabaseTransactions;
 
     private array $product;
-    private $id;
 
     protected function setUp(): void
     {
@@ -43,20 +42,20 @@ class ProductTest extends TestCase
 
         // Test if we send correct data to product store endpoint, it will be ok
         $response = $this->post('/api/products', $this->product);
-        $this->id = $response->json("id");
+        $id = $response->json("id");
         $response->assertStatus(200);
         $this->assertDatabaseHas('products', [
             'code' => $this->product["code"]
         ]);
         // test product show functionality
-        $response = $this->get('/api/products/' . $this->id);
+        $response = $this->get('/api/products/' . $id);
         $response->assertStatus(200);
         // test product update functionality
-        $response = $this->put('/api/products/' . $this->id, $this->product);
+        $response = $this->put('/api/products/' . $id, $this->product);
         // Todo : check if it is really updated or not
         $response->assertStatus(200);
         // test product delete functionality
-        $response = $this->delete('/api/products/' . $this->id);
+        $response = $this->delete('/api/products/' . $id);
         // Todo : check if it is really deleted or not
         $response->assertStatus(200);
     }
