@@ -12,6 +12,7 @@ use JsonSerializable;
  * @property mixed id
  * @property mixed code
  * @property mixed title
+ * @property mixed category
  * @property mixed description
  * @property mixed created_at
  */
@@ -29,7 +30,7 @@ class ProductCollection extends JsonResource
             'Product ID' => $this->id,
             'Product code' => $this->code,
             'Product title' => $this->title,
-            'Product category name' => $this->category->name,
+            'Product category name' => $this->category?$this->category->name:"uncategorized",
             'Description of product' => $this->description,
             'Creation date' => Carbon::parse($this->created_at)->toDateString()
         ];
