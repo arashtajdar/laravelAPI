@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewProductAddedEvent;
 use App\Http\Resources\ProductCollection;
-use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -40,7 +40,9 @@ class ProductController extends Controller
             $errorText = $validator->messages()->first('*');
             return Response($errorText,"422");
         }
-        return Response(Product::create($request->all()),"200");
+        $product = Product::create($request->all());
+        event(new NewProductAddedEvent($product));
+        return Response($product,"200");
     }
 
     /**
