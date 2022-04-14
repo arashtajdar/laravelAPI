@@ -48,7 +48,7 @@ class ProductController extends Controller
      */
     public function show(int $id): Response
     {
-        return Response(new ProductCollection(Product::find($id)),"200");
+        return Response(new ProductCollection(Product::with("category")->find($id)),"200");
     }
 
     /**
