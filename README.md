@@ -1,4 +1,4 @@
-#IT Jobs Worldwide test United Remote
+# Coding test for United Remote
 #### Arash Tajdar
 
 ## About the project
