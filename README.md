@@ -15,6 +15,21 @@
 ## How to run the project
 
 1. Create .env file and Copy .env.example file to this new file
-2. Change variable like this => DB_HOST=db (*It is important*)
+2. Change variable like this
+   ``
+   DB_CONNECTION=mysql
+   DB_HOST=db
+   DB_PORT=3306
+   DB_DATABASE=laravel
+   DB_USERNAME=laravelUser
+   DB_PASSWORD=@wn12341818
+   ``
+   - It is important to : 
+     - change host variable to db 
+     - set a new username and password 
+     - change the name of the database to laravel (you can modify this in docker-compose/mysql/db_init.sql file) 
+       
+otherwise you may encounter errors on running db-container
+
 3. Run ./init.sh bash file or alternatively run all the commands in this file one by one
 
