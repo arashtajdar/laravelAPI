@@ -14,10 +14,10 @@ services:
         volumes:
             - ./:/var/www
         networks:
-            - travellist
+            - united
 
     db:
-        image: mysql:5.7
+        image: mysql:8.0
         container_name: united-remote-db
         restart: unless-stopped
         environment:
@@ -45,5 +45,5 @@ services:
             - united
 
 networks:
-    travellist:
+    united:
         driver: bridge
