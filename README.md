@@ -32,4 +32,5 @@
 otherwise you may encounter errors on running db-container
 
 3. Run ./init.sh bash file or alternatively run all the commands in this file one by one
+4. Run localhost:800 and use Postman collection to send requests
 
