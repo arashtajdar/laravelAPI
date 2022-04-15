@@ -1,43 +1,49 @@
-# For more information: https://laravel.com/docs/sail
-version: '3'
+version: "3.7"
 services:
-    laravel.test:
+    app:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.1
-            dockerfile: Dockerfile
             args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.1/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
+                user: sammy
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: united-remote
+        container_name: united-remote-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - united
+
+    db:
+        image: mysql:8.0
+        container_name: united-remote-db
+        restart: unless-stopped
         environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
         volumes:
-            - '.:/var/www/html'
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
         networks:
-            - sail
-        depends_on:
-            - redis
-    redis:
-        image: 'redis:alpine'
+            - united
+
+    nginx:
+        image: nginx:alpine
+        container_name: united-remote-nginx
+        restart: unless-stopped
         ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
+            - 8000:80
         volumes:
-            - 'sail-redis:/data'
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
         networks:
-            - sail
-        healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
-            retries: 3
-            timeout: 5s
+            - united
+
 networks:
-    sail:
+    united:
         driver: bridge
-volumes:
-    sail-redis:
-        driver: local
