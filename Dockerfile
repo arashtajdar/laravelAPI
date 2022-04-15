@@ -33,10 +33,3 @@ WORKDIR /var/www
 
 USER $user
 
-COPY --chown=www-data . /var/www
-RUN php artisan key:generate
-RUN php artisan cache:clear
-RUN php artisan route:clear
-RUN php artisan config:clear
-RUN php artisan view:clear
-RUN php artisan migrate
