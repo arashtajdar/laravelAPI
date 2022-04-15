@@ -10,4 +10,11 @@
 - I wrote some annotations to document my lines, also I wrote some comment for documentations. I think those are enough because the other parts of my code are clearly readable, but this one also can be extended :)
 - I added category table, and it's relation to product table just to show how I use relations in migration file and in models and controllers. I can also extend it and create new tables.
 - Docker implemented. It was better and easier to use sail, but I prefer to create the Dockerfile by myself.
-- Docker and related files need many improvements (needs some more time), but it is good for now. 
+- Docker and related files need many improvements (needs some more time), but it is good for now.
+
+## How to run the project
+
+1. Create .env file and Copy .env.example file to this new file
+2. Change variable like this => DB_HOST=db (*It is important*)
+3. Run ./init.sh bash file or alternatively run all the commands in this file one by one
+
