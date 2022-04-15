@@ -29,8 +29,8 @@
      - set a new username and password 
      - change the name of the database to laravel (you can modify this in docker-compose/mysql/db_init.sql file) 
        
-otherwise you may encounter errors on running db-container
+Or you may encounter errors on running db-container
 
 3. Run ./init.sh bash file or alternatively run all the commands in this file one by one
-4. Run localhost:800 and use Postman collection to send requests
+4. Run localhost:800 and use Postman collection (United Remote.postman_collection.json) in root folder to send requests
 
