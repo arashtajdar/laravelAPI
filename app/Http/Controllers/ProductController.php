@@ -33,7 +33,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(),[
             "code" => "required|string",
             "title" => "required|string",
-            "category_id" => 'nullable|numeric|exists:Categories,id',
+            "category_id" => 'nullable|numeric|exists:categories,id',
             "description" => "required|string",
         ]);
         if ($validator->fails()) {
