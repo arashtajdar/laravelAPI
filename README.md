@@ -34,12 +34,13 @@ Users can CRUD.
      - set a new username and password 
        - change the name of the database to laravel (you can modify this in docker-compose/mysql/db_init.sql file) 
    - The app will send an email after creating every product:<br>
-you can use these settings in env file to be able to send email from inside the app
+you should change these settings in env file  and set the variables with working smtp settings to be able to send email from inside the app <br>
+     (I can give you the settings)
 <pre>
-MAIL_HOST=smtp-relay.sendinblue.com
-MAIL_PORT=587
-MAIL_USERNAME=arash.tajdar@gmail.com
-MAIL_PASSWORD=xsmtpsib-8bb1a8f76293056d0775c6b07db1d8472631c04cab165afb3786cb6972026e77-DBrhwgnQLbmfckTO
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
 </pre>
 or if you want to disable this feature simply comment Line 31 in SendMailToAdminForNewProductListener.php
 
