@@ -32,8 +32,16 @@ Users can CRUD.
    - It is important to :  
      - change host variable to db 
      - set a new username and password 
-     - change the name of the database to laravel (you can modify this in docker-compose/mysql/db_init.sql file) 
-       
+       - change the name of the database to laravel (you can modify this in docker-compose/mysql/db_init.sql file) 
+   - The app will send an email after creating every product:<br>
+you can use these settings in env file to be able to send email from inside the app
+<pre>
+MAIL_HOST=smtp-relay.sendinblue.com
+MAIL_PORT=587
+MAIL_USERNAME=arash.tajdar@gmail.com
+MAIL_PASSWORD=xsmtpsib-8bb1a8f76293056d0775c6b07db1d8472631c04cab165afb3786cb6972026e77-DBrhwgnQLbmfckTO
+</pre>
+or if you want to disable this feature simply comment Line 31 in SendMailToAdminForNewProductListener.php
 
 3. Run ./init.sh bash file (* it may take a long time to generate autoload file*)
 4. Run localhost:8000 and use Postman collection (api.postman_collection.json) in root folder to send requests
