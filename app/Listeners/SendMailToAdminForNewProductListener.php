@@ -28,6 +28,6 @@ class SendMailToAdminForNewProductListener implements ShouldQueue
     public function handle($event)
     {
         $product_code = $event->product->code;
-        Mail::to("email@email.com")->send(new NewProductAddedMail($product_code));
+        Mail::to("arashtajdar@gmail.com")->send(new NewProductAddedMail($product_code));
     }
 }
