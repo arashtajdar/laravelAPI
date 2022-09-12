@@ -29,6 +29,9 @@ Users can CRUD.
    DB_USERNAME=laravelUser
    DB_PASSWORD=@wn12341818
 </pre>
+also 
+<pre>QUEUE_CONNECTION=database
+</pre>
    - It is important to :  
      - change host variable to db 
      - set a new username and password 
