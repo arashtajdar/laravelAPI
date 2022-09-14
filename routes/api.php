@@ -18,19 +18,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Auth routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/register',  'register');
+    Route::post('/login',  'login');
+});
+
 
 // Product routes
-Route::get('/products',[ProductController::class,'index']);
-Route::get('/products/{id}',[ProductController::class,'show']);
+Route::controller(ProductController::class)->group(function (){
+    Route::get('/products','index');
+    Route::get('/products/{id}','show');
+});
+
 
 
 Route::middleware(['auth:sanctum'])->group(function (){
     // Product routes
-    Route::post('/products',[ProductController::class,'store']);
-    Route::put('/products/{id}',[ProductController::class,'update']);
-    Route::delete('/products/{id}',[ProductController::class,'destroy']);
+    Route::controller(ProductController::class)->group(function () {
+        Route::post('/products','store');
+        Route::put('/products/{id}','update');
+        Route::delete('/products/{id}','destroy');
+    });
     // Category routes
     Route::post('/category',[CategoryController::class,'store']);
 //    Route::put('/category/{id}',[CategoryController::class,'update']);
