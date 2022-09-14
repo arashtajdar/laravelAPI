@@ -1,4 +1,4 @@
-# Coding test for United Remote
+# Laravel API coding test
 #### Arash Tajdar
 
 ## About the project

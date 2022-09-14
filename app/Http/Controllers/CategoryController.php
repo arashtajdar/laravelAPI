@@ -28,5 +28,6 @@ class CategoryController extends Controller
         }
         $product = Category::create($request->all());
         return Response($product,"200");
+
     }
 }
