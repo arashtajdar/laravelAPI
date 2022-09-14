@@ -52,11 +52,9 @@ class ProductTest extends TestCase
         $response->assertStatus(200);
         // test product update functionality
         $response = $this->put('/api/products/' . $id, $this->product);
-        // Todo : check if it is really updated or not
         $response->assertStatus(200);
         // test product delete functionality
         $response = $this->delete('/api/products/' . $id);
-        // Todo : check if it is really deleted or not
         $response->assertStatus(200);
     }
 
