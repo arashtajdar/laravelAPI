@@ -30,6 +30,11 @@ Route::controller(ProductController::class)->group(function (){
     Route::get('/products/{id}','show');
 });
 
+// Category routes
+Route::controller(CategoryController::class)->group(function (){
+    Route::get('/category','index');
+});
+
 
 
 Route::middleware(['auth:sanctum'])->group(function (){

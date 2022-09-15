@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NewProductAddedEvent;
+use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
+    /**
+     * Display a list of all products.
+     *
+     * @return Response
+     */
+    public function index(): Response
+    {
+        $categories = Category::all();
+        return Response(CategoryCollection::collection($categories),"200");
+    }
     /**
      * create new category
      *
