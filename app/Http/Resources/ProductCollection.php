@@ -27,12 +27,12 @@ class ProductCollection extends JsonResource
     public function toArray($request)
     {
         return [
-            'Product ID' => $this->id,
-            'Product code' => $this->code,
-            'Product title' => $this->title,
-            'Product category name' => $this->category?$this->category->name:"uncategorized",
-            'Description of product' => $this->description,
-            'Creation date' => Carbon::parse($this->created_at)->toDateString()
+            'product_id' => $this->id,
+            'product_code' => $this->code,
+            'product_title' => $this->title,
+            'product_category_name' => $this->category?$this->category->name:"uncategorized",
+            'product_description' => $this->description,
+            'created_at' => Carbon::parse($this->created_at)->toDateString()
         ];
     }
 }
