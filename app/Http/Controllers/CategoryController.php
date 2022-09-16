@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -38,5 +39,16 @@ class CategoryController extends Controller
         $product = Category::create($request->all());
         return Response($product,"200");
 
+    }
+    /**
+     * Remove the specified category from database.
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function destroy(int $id): Response
+    {
+        Category::destroy($id);
+        return Response("Successfully deleted",200);
     }
 }

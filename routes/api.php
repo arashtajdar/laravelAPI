@@ -47,7 +47,7 @@ Route::middleware(['auth:sanctum'])->group(function (){
     // Category routes
     Route::post('/category',[CategoryController::class,'store']);
 //    Route::put('/category/{id}',[CategoryController::class,'update']);
-//    Route::delete('/category/{id}',[CategoryController::class,'destroy']);
+    Route::delete('/category/{id}',[CategoryController::class,'destroy']);
     // Auth routes
     Route::post('/logout', [AuthController::class, 'logout']);
 
