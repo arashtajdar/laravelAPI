@@ -19,6 +19,7 @@ Users can CRUD.
 - Docker and related files need many improvements, but it is good for now (because it works).
 - Update down method of some migrations
 - Add policy to some controllers to manage who can edit products and category names
+- create statistics table and create command to collect some statistics and save it in that table
 
 ## How to run the project
 
