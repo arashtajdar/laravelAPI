@@ -53,7 +53,11 @@ class ProductController extends Controller
      */
     public function show(int $id): Response
     {
-        return Response(new ProductCollection(Product::with("category")->find($id)),"200");
+        $product = Product::with("category")->find($id);
+        if (!$product){
+            return Response("Not found","200");
+        }
+        return Response(new ProductCollection($product),"200");
     }
 
     /**
@@ -68,7 +72,7 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         if (!$product){
-            return Response("Not found","404");
+            return Response("Not found","200");
         }
         $product->update($request->all());
         return Response(new ProductCollection($product),"200");
