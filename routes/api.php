@@ -27,7 +27,7 @@ Route::controller(AuthController::class)->group(function () {
 // Product routes
 Route::controller(ProductController::class)->group(function (){
     Route::get('/products','index');
-    Route::get('/products/{id}','show');
+    Route::get('/products/{id}','show')->middleware("increase.view.count");
 });
 
 // Category routes
