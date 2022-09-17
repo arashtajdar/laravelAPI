@@ -14,11 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->bigInteger("category_id")
-                ->unsigned()
-                ->index()
-                ->nullable()
-                ->after("description");
+            $table->bigInteger("view_count")
+                  ->default(0)
+                  ->after("category_id");
         });
     }
 
@@ -29,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        // todo
+        Schema::table('products', function (Blueprint $table) {
+            // todo
+        });
     }
 };
