@@ -9,6 +9,7 @@ Users can CRUD.
 - Sanctum for Auth
 - Laravel collections to display the results
 - Faker and factory for feature tests
+- Middleware to count product view count
 
 ### Necessary improvements :
 
