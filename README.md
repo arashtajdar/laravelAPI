@@ -52,5 +52,5 @@ or if you want to disable this feature simply comment Line 31 in SendMailToAdmin
 
 3. Run ./init.sh bash file (* it may take a long time to generate autoload file*)
 4. Run localhost:8000 and use Postman collection (api.postman_collection.json) in root folder to send requests
-5. you can also test all functionalities by initializing this repo ```https://github.com/arashtajdar/laravelAPI-front```
+5. you can also test all functionalities by initializing this repo ```https://github.com/arashtajdar/VueJs-sample```
 
