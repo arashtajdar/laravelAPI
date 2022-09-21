@@ -13,6 +13,7 @@ Users can CRUD.
 
 ### Necessary improvements :
 
+- Avoid using eloquent inside controller (it's sample, and I used them inside for now)
 - feature tests can be extended.
 - Documentation can get improved.
 - Docker and related files need improvements.
