@@ -30,7 +30,7 @@ class ProductController extends Controller
      */
     public function store(PostProductRequest $request): Response
     {
-        $product = Product::create($request->all());
+        $product = Product::create($request->validated());
         event(new NewProductAddedEvent($product));
         return Response($product,"200");
     }
@@ -64,7 +64,7 @@ class ProductController extends Controller
         if (!$product){
             return Response("Not found","200");
         }
-        $product->update($request->all());
+        $product->update($request->validated());
         return Response(new ProductCollection($product),"200");
     }
 

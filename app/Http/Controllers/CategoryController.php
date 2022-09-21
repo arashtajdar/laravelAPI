@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function store(PostCategoryRequest $request): Response
     {
-        $product = Category::create($request->all());
+        $product = Category::create($request->validated());
         return Response($product,"200");
 
     }
