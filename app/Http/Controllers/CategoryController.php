@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostCategoryRequest;
 use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -27,15 +26,8 @@ class CategoryController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request): Response
+    public function store(PostCategoryRequest $request): Response
     {
-        $validator = Validator::make($request->all(),[
-            "name" => "required|string"
-        ]);
-        if ($validator->fails()) {
-            $errorText = $validator->messages()->first('*');
-            return Response($errorText,"422");
-        }
         $product = Category::create($request->all());
         return Response($product,"200");
 
