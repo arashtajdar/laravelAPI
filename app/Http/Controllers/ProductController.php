@@ -43,10 +43,7 @@ class ProductController extends Controller
      */
     public function show(int $id): Response
     {
-        $product = Product::with("category")->find($id);
-        if (!$product){
-            return Response("Not found","200");
-        }
+        $product = Product::with("category")->findOrFail($id);
         return Response(new ProductCollection($product),"200");
     }
 
