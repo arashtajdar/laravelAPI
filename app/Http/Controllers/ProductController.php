@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewProductAddedEvent;
+use App\Http\Requests\PostProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -28,18 +28,8 @@ class ProductController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request): Response
+    public function store(PostProductRequest $request): Response
     {
-        $validator = Validator::make($request->all(),[
-            "code" => "required|string",
-            "title" => "required|string",
-            "category_id" => 'nullable|numeric|exists:categories,id',
-            "description" => "required|string",
-        ]);
-        if ($validator->fails()) {
-            $errorText = $validator->messages()->first('*');
-            return Response($errorText,"422");
-        }
         $product = Product::create($request->all());
         event(new NewProductAddedEvent($product));
         return Response($product,"200");
@@ -67,7 +57,7 @@ class ProductController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, int $id): Response
+    public function update(PostProductRequest $request, int $id): Response
     {
 
         $product = Product::find($id);
