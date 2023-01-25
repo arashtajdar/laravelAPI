@@ -14,8 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('activities', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
+            $table->string("code");
+            $table->string("title");
+            $table->string("description");
+            $table->string("type");
+            $table->unsignedBigInteger("user");
+            $table->integer("city");
+            $table->string("location");
+            $table->timestamp("start");
+            $table->timestamp("end");
             $table->timestamps();
+            $table->foreign('user')
+                ->references('id')
+                ->on('users');
         });
     }
 
