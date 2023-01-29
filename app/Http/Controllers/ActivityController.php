@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
 {
+    public function index(): Response
+    {
+        $activities = Activity::all();
+        return Response($activities, 200);
+    }
 
     /**
-     * Save a new Activity into database.
+     * Save a new product into database.
      *
      * @param Request $request
      * @return Response
@@ -27,7 +32,29 @@ class ActivityController extends Controller
         $validatedData['user'] = Auth::user()->id;
         $activity = Activity::create($validatedData);
 //        event(new NewActivityAddedEvent($activity));
-        return Response($activity,"200");
+        return Response($activity, "200");
     }
+
+    public function show($id): Response
+    {
+        $activity = Activity::findOrFail($id);
+        return Response($activity, 200);
+    }
+
+    public function update(PostActivityRequest $request, $id): Response
+    {
+        $validatedData = $request->validated();
+        $activity = Activity::findOrFail($id);
+        $activity->update($validatedData);
+        return Response($activity, 200);
+    }
+
+    public function destroy($id): Response
+    {
+        $activity = Activity::findOrFail($id);
+        $activity->delete();
+        return Response('Activity deleted.', 200);
+    }
+
 
 }
