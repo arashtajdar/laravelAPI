@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -30,6 +31,13 @@ Route::controller(ProductController::class)->group(function (){
     Route::get('/products/{id}','show')->middleware("increase.view.count");
 });
 
+// Activity routes
+Route::controller(ActivityController::class)->group(function (){
+    Route::get('/Activities','index');
+    Route::get('/Activities/{id}','show');
+//        ->middleware("increase.view.count");
+});
+
 // Category routes
 Route::controller(CategoryController::class)->group(function (){
     Route::get('/category','index');
@@ -44,6 +52,14 @@ Route::middleware(['auth:sanctum'])->group(function (){
         Route::put('/products/{id}','update');
         Route::delete('/products/{id}','destroy');
     });
+
+    // Activity routes
+    Route::controller(ActivityController::class)->group(function () {
+        Route::post('/Activities','store');
+        Route::put('/Activities/{id}','update');
+        Route::delete('/Activities/{id}','destroy');
+    });
+
     // Category routes
     Route::post('/category',[CategoryController::class,'store']);
 //    Route::put('/category/{id}',[CategoryController::class,'update']);
