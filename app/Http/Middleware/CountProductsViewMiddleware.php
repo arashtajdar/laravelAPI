@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Product;
+use App\Models\Activity;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class CountProductsViewMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $product = Product::with("category")->find($request->id);
+        $product = Activity::find($request->id);
         $product?->increment("view_count");
         return $next($request);
     }
