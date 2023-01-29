@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewProductAddedEvent;
 use App\Http\Requests\PostActivityRequest;
 use App\Http\Requests\PostProductRequest;
+use App\Http\Resources\ActivityCollection;
 use App\Http\Resources\ProductCollection;
 use App\Models\Activity;
 use App\Models\Product;
@@ -17,7 +18,7 @@ class ActivityController extends Controller
     public function index(): Response
     {
         $activities = Activity::all();
-        return Response($activities, 200);
+        return Response(ActivityCollection::collection($activities),"200");
     }
 
     /**
@@ -38,7 +39,7 @@ class ActivityController extends Controller
     public function show($id): Response
     {
         $activity = Activity::findOrFail($id);
-        return Response($activity, 200);
+        return Response(new ActivityCollection($activity),"200");
     }
 
     public function update(PostActivityRequest $request, $id): Response
@@ -46,7 +47,7 @@ class ActivityController extends Controller
         $validatedData = $request->validated();
         $activity = Activity::findOrFail($id);
         $activity->update($validatedData);
-        return Response($activity, 200);
+        return Response(new ActivityCollection($activity),"200");
     }
 
     public function destroy($id): Response
