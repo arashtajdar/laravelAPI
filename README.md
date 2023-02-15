@@ -2,7 +2,7 @@
 #### Arash Tajdar
 
 ## About the project
-This is a simple laravel api to list products and categories. 
+This is a simple laravel api to manage events. 
 Users can CRUD.
 
 ### I used :
