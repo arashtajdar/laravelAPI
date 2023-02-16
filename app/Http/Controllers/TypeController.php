@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretypeRequest;
 use App\Http\Requests\UpdatetypeRequest;
+use App\Models\Activity;
 use App\Models\type;
+use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
@@ -15,7 +17,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        return Type::where('active', true)->paginate(10);
     }
 
     /**
@@ -36,7 +38,9 @@ class TypeController extends Controller
      */
     public function store(StoretypeRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $activity = Activity::create($validatedData);
+        return Response($activity, "200");
     }
 
     /**
@@ -45,9 +49,9 @@ class TypeController extends Controller
      * @param  \App\Models\type  $type
      * @return \Illuminate\Http\Response
      */
-    public function show(type $type)
+    public function show($id)
     {
-        //
+        return Type::findOrFail($id);
     }
 
     /**
@@ -77,10 +81,13 @@ class TypeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\type  $type
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(type $type)
+    public function destroy($id)
     {
-        //
+        $type = Type::findOrFail($id);
+        $type->delete();
+
+        return response()->json($type, 204);
     }
 }

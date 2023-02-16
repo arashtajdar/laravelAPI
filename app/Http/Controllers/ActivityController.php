@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostActivityRequest;
+use App\Http\Requests\StoreActivityRequest;
 use App\Http\Resources\ActivityCollection;
 use App\Models\Activity;
 use Illuminate\Http\Response;
@@ -19,10 +19,10 @@ class ActivityController extends Controller
     /**
      * Save a new product into database.
      *
-     * @param PostActivityRequest $request
+     * @param StoreActivityRequest $request
      * @return Response
      */
-    public function store(PostActivityRequest $request): Response
+    public function store(StoreActivityRequest $request): Response
     {
         $validatedData = $request->validated();
         $validatedData['user'] = Auth::user()->id;
@@ -37,7 +37,7 @@ class ActivityController extends Controller
         return Response(new ActivityCollection($activity),"200");
     }
 
-    public function update(PostActivityRequest $request, $id): Response
+    public function update(StoreActivityRequest $request, $id): Response
     {
         $validatedData = $request->validated();
         $activity = Activity::findOrFail($id);
