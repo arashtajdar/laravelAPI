@@ -30,7 +30,7 @@ class PostActivityRequest extends FormRequest
             "code" => "required|string",
             "title" => "required|string",
             "description" => "required|string",
-            "type" => 'required|numeric',
+            "type" => 'required|numeric|exists:types,id',
             "city" => 'required|numeric',
             "location" => 'required|string',
             "start" => 'required|date_format:Y-m-d H:i:s',
