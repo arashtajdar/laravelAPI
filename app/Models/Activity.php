@@ -14,6 +14,6 @@ class Activity extends Model
     use HasFactory;
 
     protected $fillable = [
-        "code", "title", "description", "type" , "user", "city", "location", "start", "end"
+        "code", "title", "description", "type" , "user", "city", "location", "start", "end", "type_id"
     ];
 }
