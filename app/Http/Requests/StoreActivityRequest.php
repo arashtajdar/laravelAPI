@@ -33,8 +33,8 @@ class StoreActivityRequest extends FormRequest
             "type_id" => 'required|numeric|exists:types,id',
             "city" => 'required|numeric',
             "location" => 'required|string',
-            "start" => 'required|date_format:Y-m-d H:i:s',
-            "end" => 'required|date_format:Y-m-d H:i:s',
+            "start" => 'required|date_format:Y-m-d\\TH:i',
+            "end" => 'required|date_format:Y-m-d\\TH:i',
         ];
     }
 
